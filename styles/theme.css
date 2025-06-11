@@ -9,16 +9,30 @@
 
 .button {
   background: var(--material);
-  color: var(--material-text);
-  cursor: pointer;
-  padding: 0 0.25em;
-}
-
-.border-button {
-  border-style: solid;
-  border-width: 1px;
-  border-left-color: var(--border-lightest);
+  border: 1px solid;
   border-top-color: var(--border-lightest);
+  border-left-color: var(--border-lightest);
   border-right-color: var(--border-darkest);
   border-bottom-color: var(--border-darkest);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 0.25em 0.4em;
+  gap: 0.25em;
+  color: var(--material-text);
+}
+
+.button:active {
+  border-top-color: var(--border-darkest);
+  border-left-color: var(--border-darkest);
+  border-right-color: var(--border-lightest);
+  border-bottom-color: var(--border-lightest);
+}
+
+.icon {
+  width: 1.2em;
+  height: 1.2em;
+  display: inline-block;
 }

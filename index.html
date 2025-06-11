@@ -10,19 +10,35 @@
     <main class="window border-border">
       <header class="window-header">
         <h2 class="window-title">stream filter</h2>
-        <button type="button" aria-label="close" class="button border-button">
+        <button type="button" aria-label="close" class="button close-button">
           <span class="icon icon-close"></span>
         </button>
       </header>
 
       <div class="window-content">
-        <div class="window-record">
+        <div class="camera">
           <span>... </span>
-          <button class="button border-button">
-            <span class="icon icon-record">⏺ </span>
-            <span class="text">녹화</span>
+          <button class="button camera-button" type="button" aria-label="camera">
+            <span class="icon icon-camera"></span>
+            <span class="text">촬영</span>
           </button>
         </div>
+
+        <hr />
+
+        <div class="canvas-wrapper">
+          <video id="video" />
+          <canvas id="canvas" />
+        </div>
+
+        <hr />
+
+        <ul class="tab-wrapper">
+          <li class="tab">필터 1</li>
+          <li class="tab">필터 2</li>
+          <li class="tab">필터 3</li>
+          <li class="tab">필터 4</li>
+        </ul>
       </div>
     </main>
 

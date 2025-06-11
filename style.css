@@ -1,1 +1,46 @@
 @import './styles/config.css';
+@import './styles/theme.css';
+
+.window {
+  width: 420px;
+  background: var(--material);
+  padding: 0.25em;
+}
+
+.window-header {
+  position: relative;
+  background: var(--header-background);
+  color: var(--header-text);
+  padding: 0.25em 0.25em 0.25em 0.5em;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.window-title {
+  font-weight: 100;
+  letter-spacing: 0.15em;
+  font-size: 16px;
+}
+
+.window-record {
+  padding: 0.5em 0.25em 0.2em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.icon {
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+}
+
+.icon-close {
+  mask: url('./assets/icons/x.svg') no-repeat center;
+  mask-size: contain;
+  -webkit-mask: url('./assets/icons/x.svg') no-repeat center;
+  -webkit-mask-size: contain;
+  background-color: var(--material-text);
+}

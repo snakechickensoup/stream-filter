@@ -1,131 +1,24 @@
-/* Box styles */
-.box {
-  box-sizing: border-box;
-  display: inline-block;
+.border-border {
+  border-style: solid;
+  border-width: 2px;
+  border-left-color: var(--border-lightest);
+  border-top-color: var(--border-lightest);
+  border-right-color: var(--border-darkest);
+  border-bottom-color: var(--border-darkest);
+}
+
+.button {
   background: var(--material);
   color: var(--material-text);
+  cursor: pointer;
+  padding: 0 0.25em;
 }
 
-/* Shadow styles */
-.shadow {
-  box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.35);
-}
-
-.inset-shadow {
-  box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.2);
-}
-
-/* Border styles - Button */
 .border-button {
   border-style: solid;
-  border-width: 2px;
+  border-width: 1px;
   border-left-color: var(--border-lightest);
   border-top-color: var(--border-lightest);
   border-right-color: var(--border-darkest);
   border-bottom-color: var(--border-darkest);
-  box-shadow: inset 1px 1px 0px 1px var(--border-light), inset -1px -1px 0 1px var(--border-dark);
-}
-
-.border-button-pressed {
-  border-style: solid;
-  border-width: 2px;
-  border-left-color: var(--border-darkest);
-  border-top-color: var(--border-darkest);
-  border-right-color: var(--border-lightest);
-  border-bottom-color: var(--border-lightest);
-  box-shadow: inset 1px 1px 0px 1px var(--border-dark), inset -1px -1px 0 1px var(--border-light);
-}
-
-/* Border styles - Field (inset) */
-.border-field {
-  border-style: solid;
-  border-width: 2px;
-  border-left-color: var(--border-dark);
-  border-top-color: var(--border-dark);
-  border-right-color: var(--border-lightest);
-  border-bottom-color: var(--border-lightest);
-  box-shadow: inset 1px 1px 0px 1px var(--border-darkest), inset -1px -1px 0 1px var(--border-light);
-}
-
-/* Flat box styles */
-.flat-box {
-  position: relative;
-  box-sizing: border-box;
-  display: inline-block;
-  color: var(--material-text);
-  background: var(--canvas);
-  border: 2px solid var(--canvas);
-  outline: 2px solid var(--flat-dark);
-  outline-offset: -4px;
-}
-
-.flat-box.disabled {
-  background: var(--flat-light);
-}
-
-/* Disabled text styles */
-.disabled-text {
-  -webkit-text-fill-color: var(--material-text-disabled);
-  color: var(--material-text-disabled);
-  text-shadow: 1px 1px var(--material-text-disabled-shadow);
-}
-
-/* Focus outline */
-.focus-outline:focus {
-  outline: 2px dotted var(--material-text);
-}
-
-/* 스크롤바 스타일 */
-::-webkit-scrollbar {
-  width: 26px;
-  height: 26px;
-}
-
-::-webkit-scrollbar-track {
-  background-image: linear-gradient(
-      45deg,
-      var(--material) 25%,
-      transparent 25%,
-      transparent 75%,
-      var(--material) 75%
-    ),
-    linear-gradient(
-      45deg,
-      var(--material) 25%,
-      transparent 25%,
-      transparent 75%,
-      var(--material) 75%
-    );
-  background-color: var(--border-lightest);
-  background-size: 4px 4px;
-  background-position: 0 0, 2px 2px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--material);
-  border-style: solid;
-  border-width: 2px;
-  border-left-color: var(--border-lightest);
-  border-top-color: var(--border-lightest);
-  border-right-color: var(--border-darkest);
-  border-bottom-color: var(--border-darkest);
-  box-shadow: inset 1px 1px 0px 1px var(--border-light), inset -1px -1px 0 1px var(--border-dark);
-  outline-offset: -2px;
-}
-
-/* 사용 예시 클래스들 */
-.button {
-  font-family: var(--font-family);
-  font-size: var(--font-size);
-  padding: 4px 8px;
-  background: var(--material);
-  color: var(--material-text);
-}
-
-.button.normal {
-  font-weight: normal;
-}
-
-.button.bold {
-  font-weight: bold;
 }

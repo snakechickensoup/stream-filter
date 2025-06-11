@@ -1,0 +1,73 @@
+@font-face {
+  font-family: 'ms-sans';
+  src: url('./assets/fonts/MS\ Sans\ Serif.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ms-sans';
+  src: url('./assets/fonts/MS\ Sans\ Serif\ Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+:root {
+  --anchor: '#1034a6';
+  --anchor-visited: '#440381';
+  --border-dark: '#848584';
+  --border-darkest: '#0a0a0a';
+  --border-light: '#dfdfdf';
+  --border-lightest: '#fefefe';
+  --canvas: '#ffffff';
+  --canvas-text: '#0a0a0a';
+  --canvas-text-disabled: '#848584';
+  --canvas-text-disabled-shadow: '#fefefe';
+  --canvas-text-invert: '#fefefe';
+  --checkmark: '#0a0a0a';
+  --checkmark-disabled: '#848584';
+  --desktop-background: '#008080';
+  --flat-dark: '#9e9e9e';
+  --flat-light: '#d8d8d8';
+  --focus-secondary: '#fefe03';
+  --header-background: '#060084';
+  --header-not-active-background: '#7f787f';
+  --header-not-active-text: '#c6c6c6';
+  --header-text: '#fefefe';
+  --hover-background: '#060084';
+  --material: '#c6c6c6';
+  --material-dark: '#9a9e9c';
+  --material-text: '#0a0a0a';
+  --material-text-disabled: '#848584';
+  --material-text-disabled-shadow: '#fefefe';
+  --material-text-invert: '#fefefe';
+  --progress: '#060084';
+  --tooltip: '#fefbcc';
+
+  --font-size: 14px;
+  --font-family: 'ms-sans', sans-serif;
+  --font-weight: normal;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+p,
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+body,
+html {
+  font-family: var(--font-family);
+  font-weight: var(--font-weight);
+  font-size: var(--font-size);
+  background-color: var(--green-200);
+  color: var(--grey-900);
+  margin: 0;
+  padding: 0;
+}

@@ -73,7 +73,7 @@ html {
   background-color: var(--desktop-background);
   color: var(--material-text);
   margin: 0;
-  padding: 0;
+  padding: 0.25em;
 }
 
 body {

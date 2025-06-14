@@ -28,14 +28,6 @@
   font-size: 12px;
 }
 
-.icon-close {
-  mask: url('./assets/icons/x.svg') no-repeat center;
-  mask-size: contain;
-  -webkit-mask: url('./assets/icons/x.svg') no-repeat center;
-  -webkit-mask-size: contain;
-  background-color: var(--material-text);
-}
-
 .camera {
   padding: 0.5em 0.25em 0.1em;
   display: flex;
@@ -49,14 +41,6 @@
   cursor: pointer;
   display: flex;
   align-items: center;
-}
-
-.icon-camera {
-  mask: url('./assets/icons/camera.svg') no-repeat center;
-  mask-size: contain;
-  -webkit-mask: url('./assets/icons/camera.svg') no-repeat center;
-  -webkit-mask-size: contain;
-  background-color: var(--material-text);
 }
 
 /* canvas */

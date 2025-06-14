@@ -116,9 +116,3 @@ body {
   border-right-color: var(--border-lightest);
   border-bottom-color: var(--border-lightest);
 }
-
-.icon {
-  width: 1.2em;
-  height: 1.2em;
-  display: inline-block;
-}

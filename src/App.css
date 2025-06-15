@@ -48,7 +48,6 @@
 /* canvas */
 .canvas-wrapper {
   background: var(--canvas);
-  height: 300px;
   margin: 0.125em;
   border: 3px solid;
   border-top-color: var(--border-dark);

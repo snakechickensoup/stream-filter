@@ -67,7 +67,7 @@ export const useWebcam = () => {
   }, []);
 
   const flipCamera = useCallback(() => {
-    const newFacingMode = facingMode ? 'user' : 'environment';
+    const newFacingMode: FacingMode = facingMode === 'environment' ? 'user' : 'environment';
     startStream(newFacingMode);
   }, [facingMode, startStream]);
 

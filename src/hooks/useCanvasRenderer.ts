@@ -40,7 +40,10 @@ export const useCanvasRenderer = (videoRef: React.RefObject<HTMLVideoElement>) =
       lastFrameTimeRef.current = currentTime;
 
       if (videoRef.current && canvasRef.current && videoRef.current.videoWidth > 0) {
-        const context = canvasRef.current.getContext('2d', { alpha: false });
+        const context = canvasRef.current.getContext('2d', {
+          alpha: false,
+          willReadFrequently: true
+        });
         if (context) {
           context.drawImage(
             videoRef.current,

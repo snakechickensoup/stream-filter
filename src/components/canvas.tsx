@@ -11,7 +11,7 @@ const Canvas = (props: CanvasProps) => {
         id='video'
         ref={videoRef}
         style={{ display: 'none' }}
-        webkit-playsinline={true}
+        webkit-playsinline='true'
         autoPlay
         playsInline
         muted

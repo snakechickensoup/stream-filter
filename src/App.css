@@ -1,38 +1,34 @@
 .window {
+  top: 50px;
+  display: flex;
+  flex-direction: column;
   min-width: 280px;
   max-width: 480px;
-  background: var(--material);
+  padding: 2px;
+  background-color: var(--material);
   border: 2px solid;
-  border-top-color: var(--border-lightest);
-  border-left-color: var(--border-lightest);
-  border-right-color: var(--border-darkest);
-  border-bottom-color: var(--border-darkest);
-  box-shadow: var(--shadow);
-  padding: 0.25em;
+  border-color: var(--border-lightest) var(--border-darkest) var(--border-darkest)
+    var(--border-lightest);
+  box-shadow: var(--shadow-out);
 }
 
 .window-header {
-  background: var(--header-background);
-  color: var(--header-text);
-  padding: 0.25em 0.25em 0.25em 0.5em;
-  font-weight: bold;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 2px 4px;
   font-size: 11px;
-}
-
-.window-title {
-  font-weight: 100;
-  letter-spacing: 0.15em;
-  font-size: 12px;
+  font-weight: bold;
+  color: var(--header-text);
+  cursor: move;
+  background-color: var(--header-background);
 }
 
 .flip {
-  padding: 0.5em 0.25em 0.1em;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  padding: 0.5em 0.25em 0.1em;
 }
 
 .photo {
@@ -47,21 +43,18 @@
 
 /* canvas */
 .canvas-wrapper {
-  background: var(--canvas);
-  margin: 0.125em;
-  border: 3px solid;
-  border-top-color: var(--border-dark);
-  border-left-color: var(--border-dark);
-  border-right-color: var(--border-light);
-  border-bottom-color: var(--border-light);
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 0.125em;
+  background: var(--canvas);
+  border: 3px solid;
+  border-color: var(--border-dark) var(--border-light) var(--border-light) var(--border-dark);
 }
 
 #canvas {
   width: 100%;
   height: 100%;
+  object-fit: contain;
   background: var(--canvas);
-  object-fit: cover;
 }

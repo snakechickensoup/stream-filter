@@ -1,15 +1,15 @@
 @font-face {
-  font-family: 'ms-sans';
-  src: url('./../assets/fonts/MS\ Sans\ Serif.ttf') format('truetype');
-  font-weight: normal;
+  font-family: ms-sans;
   font-style: normal;
+  font-weight: normal;
+  src: url('./../assets/fonts/MS\ Sans\ Serif.ttf') format('truetype');
 }
 
 @font-face {
-  font-family: 'ms-sans';
-  src: url('./../assets/fonts/MS\ Sans\ Serif\ Bold.ttf') format('truetype');
-  font-weight: bold;
+  font-family: ms-sans;
   font-style: normal;
+  font-weight: bold;
+  src: url('./../assets/fonts/MS\ Sans\ Serif\ Bold.ttf') format('truetype');
 }
 
 :root {
@@ -19,7 +19,7 @@
   --border-darkest: #0a0a0a;
   --border-light: #dfdfdf;
   --border-lightest: #fefefe;
-  --canvas: #ffffff;
+  --canvas: #fff;
   --canvas-text: #0a0a0a;
   --canvas-text-disabled: #848584;
   --canvas-text-disabled-shadow: #fefefe;
@@ -43,14 +43,21 @@
   --material-text-invert: #fefefe;
   --progress: #060084;
   --tooltip: #fefbcc;
-  --destructive: #ff0000;
+  --destructive: #f00;
   --destructive-text: #fefefe;
   --destructive-text-disabled: #848584;
-  --shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-
+  --input-background: #fefefe;
+  --input-background-disabled: #d8d8d8;
   --font-size: 14px;
   --font-family: 'ms-sans', sans-serif;
   --font-weight: normal;
+  --shadow-out: inset 0.5px 0.5px 0px 0.5px var(--border-lightest),
+    inset 0 0 0 1px var(--border-dark), 1px 0px 0 0px var(--border-darkest),
+    0px 1px 0 0px var(--border-darkest), 1px 1px 0 0px var(--border-darkest);
+  --shadow-in: inset 0px 0px 0px 0px, inset 1px 1px 0px 0px var(--border-dark),
+    0.5px 0.5px 0px 0.5px var(--border-lightest);
+  --shadow-input: inset -1px -1px 0 0 var(--material), inset 1px 1px 0 0 var(--border-darkest),
+    0.5px 0.5px 0 0.5px var(--border-lightest);
 }
 
 * {
@@ -61,58 +68,101 @@ h1,
 h2,
 p,
 ul {
-  margin: 0;
   padding: 0;
+  margin: 0;
 }
 
 body,
 html {
-  font-family: var(--font-family);
-  font-weight: var(--font-weight);
-  font-size: var(--font-size);
-  background-color: var(--desktop-background);
-  color: var(--material-text);
-  margin: 0;
   padding: 0.25em;
+  margin: 0;
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  font-weight: var(--font-weight);
+  color: var(--material-text);
+  background-color: var(--desktop-background);
 }
 
 body {
-  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  min-height: 100dvh;
 }
 
 .border-border {
+  border-color: var(--border-lightest) var(--border-darkest) var(--border-darkest)
+    var(--border-lightest);
   border-style: solid;
   border-width: 2px;
-  border-left-color: var(--border-lightest);
-  border-top-color: var(--border-lightest);
-  border-right-color: var(--border-darkest);
-  border-bottom-color: var(--border-darkest);
+}
+
+.button-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
+  padding: 6px;
+}
+
+/* 버튼 래퍼 내부 버튼들 */
+.button-wrapper button {
+  min-width: 70px;
+}
+
+/* 컨텐츠 영역 */
+.content {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  padding: 6px;
+  margin-block-start: 4px;
+  margin-inline-end: 1px;
+}
+
+.menu-wrapper {
+  display: flex;
+  flex-direction: row;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 0;
+  margin: 0;
+  list-style: none;
+  border-width: 1px;
+  border-bottom-color: var(--border-dark);
+  border-bottom-style: solid;
+  box-shadow: 0 1px 0 0 var(--border-light);
+}
+
+.menu-item {
+  position: relative;
+  padding-right: 6px;
+  padding-left: 6px;
+  user-select: none;
+}
+
+.menu-item ul {
+  position: absolute;
+  left: 0;
+  color: var(--material-text);
 }
 
 .button {
-  background: var(--material);
-  border: 1px solid;
-  border-top-color: var(--border-lightest);
-  border-left-color: var(--border-lightest);
-  border-right-color: var(--border-darkest);
-  border-bottom-color: var(--border-darkest);
   display: flex;
+  gap: 0.5em;
   align-items: center;
-  cursor: pointer;
+  justify-content: space-between;
+  padding: 0.7em;
   font-size: 12px;
   color: var(--material-text);
-  justify-content: space-between;
-  gap: 0.5em;
-  padding: 0.7em;
+  cursor: pointer;
+  background: var(--material);
+  border: 1px solid;
+  border-color: var(--border-lightest) var(--border-darkest) var(--border-darkest)
+    var(--border-lightest);
 }
 
 .button:active {
-  border-top-color: var(--border-darkest);
-  border-left-color: var(--border-darkest);
-  border-right-color: var(--border-lightest);
-  border-bottom-color: var(--border-lightest);
+  border-color: var(--border-darkest) var(--border-lightest) var(--border-lightest)
+    var(--border-darkest);
 }

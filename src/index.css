@@ -102,12 +102,12 @@ body {
   border-bottom-color: var(--border-darkest);
   display: flex;
   align-items: center;
-  justify-content: center;
   cursor: pointer;
   font-size: 12px;
-  padding: 0.25em 0.4em;
-  gap: 0.25em;
   color: var(--material-text);
+  justify-content: space-between;
+  gap: 0.5em;
+  padding: 0.7em;
 }
 
 .button:active {

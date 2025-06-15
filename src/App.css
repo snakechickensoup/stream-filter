@@ -28,19 +28,21 @@
   font-size: 12px;
 }
 
-.camera {
+.flip {
   padding: 0.5em 0.25em 0.1em;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.camera-button {
-  gap: 0.4em;
-  padding: 0.7em;
-  cursor: pointer;
+.photo {
   display: flex;
-  align-items: center;
+  justify-content: center;
+  padding: 0.25em 0.25em 0.5em;
+}
+
+.photo-button {
+  background: red;
 }
 
 /* canvas */
@@ -63,45 +65,4 @@
   height: 100%;
   background: var(--canvas);
   object-fit: cover;
-}
-
-/* tabs */
-.tab-wrapper {
-  display: flex;
-  gap: 1px;
-  list-style: none;
-  padding: 0 0.125em 0.25em;
-}
-
-.tab {
-  background: var(--material);
-  border: 1px solid;
-  border-top-color: var(--border-lightest);
-  border-left-color: var(--border-lightest);
-  border-right-color: var(--border-darkest);
-  border-bottom-color: var(--border-darkest);
-  padding: 0.5em;
-  font-family: var(--font-family);
-  font-size: var(--font-size);
-  cursor: pointer;
-  flex: 1;
-  text-align: center;
-  font-size: 12px;
-}
-
-.tab.active {
-  background: var(--canvas);
-  border-top-color: var(--border-dark);
-  border-left-color: var(--border-dark);
-  border-right: none;
-  border-bottom: none;
-  position: relative;
-  z-index: 1;
-}
-
-.tab:not(.active):active {
-  border-top-color: var(--border-darkest);
-  border-left-color: var(--border-darkest);
-  border-right-color: var(--border-lightest);
-  border-bottom-color: var(--border-lightest);
 }

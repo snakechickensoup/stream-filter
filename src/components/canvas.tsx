@@ -1,7 +1,10 @@
-import { useWebcam } from '../hooks/useWebcam';
+type CanvasProps = {
+  canvasRef: React.RefObject<HTMLCanvasElement>;
+  videoRef: React.RefObject<HTMLVideoElement>;
+};
 
-const Canvas = () => {
-  const { canvasRef, videoRef } = useWebcam();
+const Canvas = (props: CanvasProps) => {
+  const { canvasRef, videoRef } = props;
   return (
     <div className='canvas-wrapper'>
       <video id='video' ref={videoRef} style={{ display: 'none' }}></video>

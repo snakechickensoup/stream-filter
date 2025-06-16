@@ -101,6 +101,7 @@ export const useCanvasRenderer = (videoRef: React.RefObject<HTMLVideoElement>) =
   return {
     canvasRef,
     startRendering,
-    stopRendering
+    stopRendering,
+    applyCanvasEffects
   };
 };

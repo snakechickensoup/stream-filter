@@ -2,6 +2,7 @@
   padding: 9px 18px 7px;
   font-size: 12px;
   color: var(--material-text);
+  cursor: pointer;
   background-color: var(--material);
   border: none;
   box-shadow: var(--shadow-out);

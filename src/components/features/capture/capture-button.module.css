@@ -1,0 +1,14 @@
+.capture-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1em 0;
+}
+
+.capture-button {
+  padding: 12px 21px 9px;
+}
+
+.capture-button:active {
+  padding: 13px 21px 8px;
+}

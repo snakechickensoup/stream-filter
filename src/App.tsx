@@ -1,3 +1,4 @@
+import { Camera } from 'lucide-react';
 import Webcam from './components/features/webcam/webcam';
 import Nav from './components/layout/nav/nav';
 import Window from './components/ui/window/window';
@@ -6,7 +7,7 @@ import { useWebcam } from './hooks/useWebcam';
 const App = () => {
   const { canvasRef, videoRef, flipCamera } = useWebcam();
   return (
-    <Window title='c a m e r a '>
+    <Window title='c a m e r a ' headerIcon={<Camera size={16} />}>
       <Nav onFlipCamera={flipCamera} />
       <Webcam canvasRef={canvasRef} videoRef={videoRef} />
     </Window>

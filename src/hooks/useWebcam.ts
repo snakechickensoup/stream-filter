@@ -5,8 +5,8 @@ import type { FacingMode } from '../libs/types';
 
 export const useWebcam = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const isStreamingRef = useRef<boolean>(false);
   const [facingMode, setFacingMode] = useState<FacingMode>('environment');
-  const [isStreaming, setIsStreaming] = useState<boolean>(false);
   const [isCaptured, setIsCaptured] = useState<boolean>(false);
   const { isMobile } = useDeviceType();
   const { canvasRef, startRendering, stopRendering, applyCanvasEffects } =
@@ -27,21 +27,19 @@ export const useWebcam = () => {
   );
 
   const playVideo = useCallback(async () => {
-    if (videoRef.current) {
-      try {
-        await videoRef.current.play();
-        setIsStreaming(true);
-      } catch (error) {
-        console.error('Error playing video:', error);
-        setIsStreaming(false);
-      }
+    if (!videoRef.current) return;
+    try {
+      await videoRef.current.play();
+    } catch (error) {
+      console.error('Error playing video:', error);
+      isStreamingRef.current = false;
     }
   }, []);
 
   const startStream = useCallback(
     async (facing: FacingMode) => {
-      if (isStreaming) return;
-      setIsStreaming(true);
+      if (isStreamingRef.current) return;
+      isStreamingRef.current = true;
 
       try {
         if (videoRef.current?.srcObject) {
@@ -63,10 +61,12 @@ export const useWebcam = () => {
         }
       } catch (error) {
         console.error('Error accessing webcam:', error);
-        setIsStreaming(false);
+        isStreamingRef.current = false;
+      } finally {
+        isStreamingRef.current = false;
       }
     },
-    [initializeStream, isStreaming, playVideo]
+    [initializeStream, playVideo]
   );
 
   const stopStream = useCallback(() => {
@@ -74,7 +74,7 @@ export const useWebcam = () => {
       const tracks = (videoRef.current.srcObject as MediaStream).getTracks();
       tracks.forEach((track) => track.stop());
       videoRef.current.srcObject = null;
-      setIsStreaming(false);
+      isStreamingRef.current = false;
       stopRendering();
     }
   }, [stopRendering]);
@@ -87,6 +87,9 @@ export const useWebcam = () => {
   const capturePhoto = useCallback(() => {
     if (isCaptured) {
       setIsCaptured(false);
+      if (videoRef.current?.srcObject) {
+        startRendering();
+      }
     } else {
       if (videoRef.current && canvasRef.current) {
         const canvas = canvasRef.current;
@@ -103,17 +106,17 @@ export const useWebcam = () => {
         }
       }
     }
-  }, [isCaptured, canvasRef, applyCanvasEffects, stopRendering]);
+  }, [isCaptured, startRendering, canvasRef, applyCanvasEffects, stopRendering]);
 
   useEffect(() => {
-    if (!isCaptured && !isStreaming && videoRef.current && !videoRef.current.srcObject) {
+    if (!isCaptured && !isStreamingRef.current && videoRef.current && !videoRef.current.srcObject) {
       startStream(facingMode);
     }
     return () => {
       stopStream();
       stopRendering();
     };
-  }, [facingMode, isCaptured, isStreaming, startStream, stopRendering, stopStream]);
+  }, [facingMode, isCaptured, startStream, stopRendering, stopStream]);
 
   useEffect(() => {
     if (!isCaptured && videoRef.current && videoRef.current.srcObject) {
@@ -123,10 +126,7 @@ export const useWebcam = () => {
 
   return {
     videoRef,
-    canvasRef: canvasRef,
-
-    // 스트림 상태
-    isStreaming,
+    canvasRef,
     facingMode,
     isCaptured,
 

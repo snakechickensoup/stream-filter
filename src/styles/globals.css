@@ -1,0 +1,53 @@
+@import url('./_variables.css');
+
+@font-face {
+  font-family: ms-sans;
+  font-style: normal;
+  font-weight: normal;
+  src: url('/assets/fonts/MS\ Sans\ Serif.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: ms-sans;
+  font-style: normal;
+  font-weight: bold;
+  src: url('/assets/fonts/MS\ Sans\ Serif\ Bold.ttf') format('truetype');
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+p,
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+body,
+html {
+  padding: 0.25em;
+  margin: 0;
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  font-weight: var(--font-weight);
+  color: var(--material-text);
+  background-color: var(--desktop-background);
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100dvh;
+}
+
+.border-border {
+  border-color: var(--border-lightest) var(--border-darkest) var(--border-darkest)
+    var(--border-lightest);
+  border-style: solid;
+  border-width: 2px;
+}

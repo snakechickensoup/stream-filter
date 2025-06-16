@@ -1,0 +1,16 @@
+.webcam-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.125em;
+  background: var(--canvas);
+  border: 3px solid;
+  border-color: var(--border-dark) var(--border-light) var(--border-light) var(--border-dark);
+}
+
+.canvas {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: var(--canvas);
+}

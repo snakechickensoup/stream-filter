@@ -1,12 +1,14 @@
-type CanvasProps = {
+import s from './webcam.module.css';
+
+type WebcamProps = {
   canvasRef: React.RefObject<HTMLCanvasElement>;
   videoRef: React.RefObject<HTMLVideoElement>;
 };
 
-const Canvas = (props: CanvasProps) => {
+const Webcam = (props: WebcamProps) => {
   const { canvasRef, videoRef } = props;
   return (
-    <div className='canvas-wrapper'>
+    <div className={s.webcamWrapper}>
       <video
         id='video'
         ref={videoRef}
@@ -16,9 +18,9 @@ const Canvas = (props: CanvasProps) => {
         playsInline
         muted
       />
-      <canvas id='canvas' ref={canvasRef} />
+      <canvas id='canvas' ref={canvasRef} className={s.canvas} />
     </div>
   );
 };
 
-export default Canvas;
+export default Webcam;

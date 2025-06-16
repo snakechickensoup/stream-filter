@@ -1,23 +1,15 @@
-import Canvas from './components/canvas';
-import Header from './components/layout/header';
-import Nav from './components/layout/nav';
-import PhotoButton from './components/photo-button';
+import Webcam from './components/features/webcam/webcam';
+import Nav from './components/layout/nav/nav';
+import Window from './components/ui/window/window';
 import { useWebcam } from './hooks/useWebcam';
-import './App.css';
 
 const App = () => {
   const { canvasRef, videoRef, flipCamera } = useWebcam();
   return (
-    <main className='window border-border'>
-      <Header />
-      <div className='window-content'>
-        <Nav onFlipCamera={flipCamera} />
-        <hr />
-        <Canvas canvasRef={canvasRef} videoRef={videoRef} />
-        <hr />
-        <PhotoButton />
-      </div>
-    </main>
+    <Window title='c a m e r a '>
+      <Nav onFlipCamera={flipCamera} />
+      <Webcam canvasRef={canvasRef} videoRef={videoRef} />
+    </Window>
   );
 };
 

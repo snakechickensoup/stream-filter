@@ -1,4 +1,6 @@
 import { RefreshCcw } from 'lucide-react';
+import Button from '../../ui/button/button';
+import s from './nav.module.css';
 
 type NavProps = {
   onFlipCamera: () => void;
@@ -7,16 +9,12 @@ type NavProps = {
 const Nav = (props: NavProps) => {
   const { onFlipCamera } = props;
   return (
-    <div className='flip'>
+    <div className={s.nav}>
       <span>... </span>
-      <button
-        className='button flip-button'
-        type='button'
-        aria-label='화면 전환 버튼'
-        onClick={onFlipCamera}>
+      <Button aria-label='화면 전환 버튼' onClick={onFlipCamera} className={s.flipButton}>
         <RefreshCcw size='16' />
-        <span className='text'>전환</span>
-      </button>
+        <span className={s.flipText}>전환</span>
+      </Button>
     </div>
   );
 };

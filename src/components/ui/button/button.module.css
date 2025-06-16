@@ -1,0 +1,27 @@
+.button {
+  padding: 7px 20px 5px;
+  font-size: 12px;
+  color: var(--material-text);
+  background-color: var(--material);
+  border: none;
+  box-shadow: var(--shadow-out);
+}
+
+.button:active {
+  padding: 8px 20px 4px;
+  outline: 1px solid var(--border-darkest);
+  outline-offset: calc(-5px);
+  border-color: var(--border-darkest) var(--border-lightest) var(--border-lightest)
+    var(--border-darkest);
+  box-shadow: var(--shadow-out);
+}
+
+.button:disabled {
+  color: var(--material-text-disabled);
+}
+
+.button:focus {
+  outline: 1px dotted var(--material-text);
+  outline-offset: calc(-5px);
+  box-shadow: var(--shadow-in);
+}

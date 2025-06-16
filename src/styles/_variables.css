@@ -37,9 +37,8 @@
   --font-size: 14px;
   --font-family: 'ms-sans', sans-serif;
   --font-weight: normal;
-  --shadow-out: inset 0.5px 0.5px 0px 0.5px var(--border-lightest),
-    inset 0 0 0 1px var(--border-dark), 1px 0px 0 0px var(--border-darkest),
-    0px 1px 0 0px var(--border-darkest), 1px 1px 0 0px var(--border-darkest);
+  --shadow-out: inset 1px 1px 0px 1px var(--border-lightest),
+    inset -0.5px -0.5px 0px 1px var(--border-dark), 1px 1px 0 1px var(--border-darkest);
   --shadow-in: inset 0px 0px 0px 0px, inset 1px 1px 0px 0px var(--border-dark),
     0.5px 0.5px 0px 0.5px var(--border-lightest);
   --shadow-input: inset -1px -1px 0 0 var(--material), inset 1px 1px 0 0 var(--border-darkest),

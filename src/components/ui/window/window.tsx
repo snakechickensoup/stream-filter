@@ -16,11 +16,7 @@ const Window = (props: WindowProps) => {
         <h2 className={s.windowTitle}>{title}</h2>
         {closeElement}
       </header>
-      <div className={s.windowContent}>
-        <hr />
-        {children}
-        <hr />
-      </div>
+      <div className={s.windowContent}>{children}</div>
     </main>
   );
 };

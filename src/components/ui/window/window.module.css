@@ -28,6 +28,7 @@
   text-overflow: ellipsis;
   font-size: 12px;
   font-weight: normal;
+  letter-spacing: 2px;
   white-space: nowrap;
 }
 
@@ -36,6 +37,5 @@
   flex-grow: 1;
   flex-direction: column;
   padding: 6px;
-  margin-block-start: 4px;
   margin-inline-end: 1px;
 }

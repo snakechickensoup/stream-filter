@@ -45,8 +45,31 @@ export const useCanvasRenderer = (videoRef: React.RefObject<HTMLVideoElement>) =
           willReadFrequently: true
         });
         if (context) {
+          const videoWidth = videoRef.current.videoWidth;
+          const videoHeight = videoRef.current.videoHeight;
+          const videoAspectRatio = videoWidth / videoHeight;
+          const canvasAspectRatio = canvasRef.current.width / canvasRef.current.height;
+
+          let sourceX = 0;
+          let sourceY = 0;
+          let sourceWidth = videoWidth;
+          let sourceHeight = videoHeight;
+
+          if (videoAspectRatio > canvasAspectRatio) {
+            sourceWidth = videoHeight * canvasAspectRatio;
+            sourceX = (videoWidth - sourceWidth) / 2;
+          } else {
+            sourceHeight = videoWidth / canvasAspectRatio;
+            sourceY = (videoHeight - sourceHeight) / 2;
+          }
+
+          context.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
           context.drawImage(
             videoRef.current,
+            sourceX,
+            sourceY,
+            sourceWidth,
+            sourceHeight,
             0,
             0,
             canvasRef.current.width,
@@ -69,12 +92,19 @@ export const useCanvasRenderer = (videoRef: React.RefObject<HTMLVideoElement>) =
   );
 
   const startRendering = useCallback(() => {
-    if (canvasRef.current && videoRef.current) {
-      const width = isMobile ? 320 : 480;
-      const height = isMobile ? 240 : 360;
+    if (canvasRef.current && videoRef.current && videoRef.current.videoWidth > 0) {
+      const videoWidth = videoRef.current.videoWidth;
+      const videoHeight = videoRef.current.videoHeight;
+      const maxSize = isMobile ? 320 : 480;
+      let canvasSize = Math.min(videoWidth, videoHeight, maxSize);
 
-      canvasRef.current.width = width;
-      canvasRef.current.height = height;
+      if (canvasSize === 0) {
+        canvasSize = maxSize;
+      }
+
+      canvasRef.current.width = canvasSize;
+      canvasRef.current.height = canvasSize;
+
       lastFrameTimeRef.current = 0;
       animationFrameRef.current = requestAnimationFrame(renderFrame);
     }

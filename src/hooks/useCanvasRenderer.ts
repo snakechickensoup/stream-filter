@@ -1,11 +1,18 @@
-import { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import { useDeviceType } from './useDeviceType';
+
+import logoImage from '/assets/images/logo.png';
 
 export const useCanvasRenderer = (videoRef: React.RefObject<HTMLVideoElement>) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationFrameRef = useRef<number>(0);
   const lastFrameTimeRef = useRef<number>(0);
+  const logoImageRef = useRef<HTMLImageElement>(new Image());
   const { isMobile } = useDeviceType();
+
+  useEffect(() => {
+    logoImageRef.current.src = logoImage;
+  }, []);
 
   const applyCanvasEffects = useCallback(
     (imageData: ImageData) => {
@@ -68,6 +75,16 @@ export const useCanvasRenderer = (videoRef: React.RefObject<HTMLVideoElement>) =
     []
   );
 
+  const drawLogo = useCallback((context: CanvasRenderingContext2D) => {
+    const logo = logoImageRef.current;
+    if (logo.complete && logo.naturalWidth > 0) {
+      const logoWidth = canvasRef.current.width * 0.28;
+      const logoHeight = (logo.naturalHeight / logo.naturalWidth) * logoWidth;
+
+      context.drawImage(logo, 10, 10, logoWidth, logoHeight);
+    }
+  }, []);
+
   const drawCanvasWithEffects = useCallback(() => {
     if (videoRef.current && canvasRef.current && videoRef.current.videoWidth > 0) {
       const context = canvasRef.current.getContext('2d', {
@@ -85,9 +102,10 @@ export const useCanvasRenderer = (videoRef: React.RefObject<HTMLVideoElement>) =
         );
         applyCanvasEffects(imageData);
         context.putImageData(imageData, 0, 0);
+        drawLogo(context);
       }
     }
-  }, [applyCanvasEffects, drawCanvas, videoRef]);
+  }, [applyCanvasEffects, drawCanvas, drawLogo, videoRef]);
 
   const renderFrame = useCallback(
     (currentTime: number) => {

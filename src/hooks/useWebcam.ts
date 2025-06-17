@@ -9,7 +9,7 @@ export const useWebcam = () => {
   const [facingMode, setFacingMode] = useState<FacingMode>('environment');
   const [isCaptured, setIsCaptured] = useState<boolean>(false);
   const { isMobile } = useDeviceType();
-  const { canvasRef, startRendering, stopRendering, applyCanvasEffects } =
+  const { canvasRef, startRendering, stopRendering, drawCanvasWithEffects } =
     useCanvasRenderer(videoRef);
 
   const initializeStream = useCallback(
@@ -91,22 +91,11 @@ export const useWebcam = () => {
         startRendering();
       }
     } else {
-      if (videoRef.current && canvasRef.current) {
-        const canvas = canvasRef.current;
-        const context = canvas.getContext('2d', { alpha: false, willReadFrequently: true });
-        if (context) {
-          const { width, height } = canvas;
-          context.drawImage(videoRef.current, 0, 0, width, height);
-          const imageData = context.getImageData(0, 0, width, height);
-          applyCanvasEffects(imageData);
-          context.putImageData(imageData, 0, 0);
-
-          setIsCaptured(true);
-          stopRendering();
-        }
-      }
+      drawCanvasWithEffects();
+      setIsCaptured(true);
+      stopRendering();
     }
-  }, [isCaptured, startRendering, canvasRef, applyCanvasEffects, stopRendering]);
+  }, [isCaptured, startRendering, drawCanvasWithEffects, stopRendering]);
 
   useEffect(() => {
     if (!isCaptured && !isStreamingRef.current && videoRef.current && !videoRef.current.srcObject) {

@@ -30,6 +30,65 @@ export const useCanvasRenderer = (videoRef: React.RefObject<HTMLVideoElement>) =
     [isMobile]
   );
 
+  const drawCanvas = useCallback(
+    (
+      videoRef: React.RefObject<HTMLVideoElement>,
+      canvasRef: React.RefObject<HTMLCanvasElement>,
+      context: CanvasRenderingContext2D
+    ) => {
+      const videoWidth = videoRef.current.videoWidth;
+      const videoHeight = videoRef.current.videoHeight;
+      const videoAspectRatio = videoWidth / videoHeight;
+      const canvasAspectRatio = canvasRef.current.width / canvasRef.current.height;
+
+      let sourceX = 0;
+      let sourceY = 0;
+      let sourceWidth = videoWidth;
+      let sourceHeight = videoHeight;
+      if (videoAspectRatio > canvasAspectRatio) {
+        sourceWidth = videoHeight * canvasAspectRatio;
+        sourceX = (videoWidth - sourceWidth) / 2;
+      } else {
+        sourceHeight = videoWidth / canvasAspectRatio;
+        sourceY = (videoHeight - sourceHeight) / 2;
+      }
+      context.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+      context.drawImage(
+        videoRef.current,
+        sourceX,
+        sourceY,
+        sourceWidth,
+        sourceHeight,
+        0,
+        0,
+        canvasRef.current.width,
+        canvasRef.current.height
+      );
+    },
+    []
+  );
+
+  const drawCanvasWithEffects = useCallback(() => {
+    if (videoRef.current && canvasRef.current && videoRef.current.videoWidth > 0) {
+      const context = canvasRef.current.getContext('2d', {
+        alpha: false,
+        willReadFrequently: true
+      });
+
+      if (context) {
+        drawCanvas(videoRef, canvasRef, context);
+        const imageData = context.getImageData(
+          0,
+          0,
+          canvasRef.current.width,
+          canvasRef.current.height
+        );
+        applyCanvasEffects(imageData);
+        context.putImageData(imageData, 0, 0);
+      }
+    }
+  }, [applyCanvasEffects, drawCanvas, videoRef]);
+
   const renderFrame = useCallback(
     (currentTime: number) => {
       if (currentTime - lastFrameTimeRef.current < 33) {
@@ -38,57 +97,10 @@ export const useCanvasRenderer = (videoRef: React.RefObject<HTMLVideoElement>) =
       }
 
       lastFrameTimeRef.current = currentTime;
-
-      if (videoRef.current && canvasRef.current && videoRef.current.videoWidth > 0) {
-        const context = canvasRef.current.getContext('2d', {
-          alpha: false,
-          willReadFrequently: true
-        });
-        if (context) {
-          const videoWidth = videoRef.current.videoWidth;
-          const videoHeight = videoRef.current.videoHeight;
-          const videoAspectRatio = videoWidth / videoHeight;
-          const canvasAspectRatio = canvasRef.current.width / canvasRef.current.height;
-
-          let sourceX = 0;
-          let sourceY = 0;
-          let sourceWidth = videoWidth;
-          let sourceHeight = videoHeight;
-
-          if (videoAspectRatio > canvasAspectRatio) {
-            sourceWidth = videoHeight * canvasAspectRatio;
-            sourceX = (videoWidth - sourceWidth) / 2;
-          } else {
-            sourceHeight = videoWidth / canvasAspectRatio;
-            sourceY = (videoHeight - sourceHeight) / 2;
-          }
-
-          context.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
-          context.drawImage(
-            videoRef.current,
-            sourceX,
-            sourceY,
-            sourceWidth,
-            sourceHeight,
-            0,
-            0,
-            canvasRef.current.width,
-            canvasRef.current.height
-          );
-
-          const imageData = context.getImageData(
-            0,
-            0,
-            canvasRef.current.width,
-            canvasRef.current.height
-          );
-          applyCanvasEffects(imageData);
-          context.putImageData(imageData, 0, 0);
-        }
-      }
+      drawCanvasWithEffects();
       animationFrameRef.current = requestAnimationFrame(renderFrame);
     },
-    [videoRef, applyCanvasEffects]
+    [drawCanvasWithEffects]
   );
 
   const startRendering = useCallback(() => {
@@ -132,6 +144,6 @@ export const useCanvasRenderer = (videoRef: React.RefObject<HTMLVideoElement>) =
     canvasRef,
     startRendering,
     stopRendering,
-    applyCanvasEffects
+    drawCanvasWithEffects
   };
 };

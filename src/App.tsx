@@ -7,10 +7,10 @@ import CaptureButton from './components/features/capture/capture-button';
 import { useWebcam } from './hooks/useWebcam';
 
 const App = () => {
-  const { canvasRef, videoRef, flipCamera, capturePhoto, isCaptured } = useWebcam();
+  const { canvasRef, videoRef, flipCamera, capturePhoto, isCaptured, saveImage } = useWebcam();
   return (
     <Window title='Camera' headerIcon={<Camera size={16} />}>
-      <Nav onFlipCamera={flipCamera} isCaptured={isCaptured} />
+      <Nav onFlipCamera={flipCamera} isCaptured={isCaptured} onSaveImage={saveImage} />
       <Separator />
       <Webcam canvasRef={canvasRef} videoRef={videoRef} />
       <Separator />

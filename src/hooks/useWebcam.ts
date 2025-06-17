@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useDeviceType } from './useDeviceType';
 import { useCanvasRenderer } from './useCanvasRenderer';
+import { saveCanvasImage } from '../libs/utils';
 import type { FacingMode } from '../libs/types';
 
 export const useWebcam = () => {
@@ -97,6 +98,11 @@ export const useWebcam = () => {
     }
   }, [isCaptured, startRendering, drawCanvasWithEffects, stopRendering]);
 
+  const saveImage = useCallback(() => {
+    if (!canvasRef.current || !isCaptured) return;
+    saveCanvasImage(canvasRef.current);
+  }, [canvasRef, isCaptured]);
+
   useEffect(() => {
     if (!isCaptured && !isStreamingRef.current && videoRef.current && !videoRef.current.srcObject) {
       startStream(facingMode);
@@ -123,6 +129,7 @@ export const useWebcam = () => {
     flipCamera,
     capturePhoto,
     startStream,
-    stopStream
+    stopStream,
+    saveImage
   };
 };

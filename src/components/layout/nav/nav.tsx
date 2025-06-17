@@ -4,16 +4,17 @@ import s from './nav.module.css';
 
 type NavProps = {
   onFlipCamera: () => void;
+  onSaveImage: () => void;
   isCaptured: boolean;
 };
 
 const Nav = (props: NavProps) => {
-  const { onFlipCamera, isCaptured } = props;
+  const { onFlipCamera, onSaveImage, isCaptured } = props;
   return (
     <div className={s.nav}>
       <span>... </span>
       {isCaptured ? (
-        <SaveButton onSave={() => {}} />
+        <SaveButton onSave={onSaveImage} />
       ) : (
         <FlipCameraButton onFlipCamera={onFlipCamera} />
       )}

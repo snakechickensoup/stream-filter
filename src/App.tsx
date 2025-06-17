@@ -10,7 +10,7 @@ const App = () => {
   const { canvasRef, videoRef, flipCamera, capturePhoto, isCaptured } = useWebcam();
   return (
     <Window title='Camera' headerIcon={<Camera size={16} />}>
-      <Nav onFlipCamera={flipCamera} />
+      <Nav onFlipCamera={flipCamera} isCaptured={isCaptured} />
       <Separator />
       <Webcam canvasRef={canvasRef} videoRef={videoRef} />
       <Separator />

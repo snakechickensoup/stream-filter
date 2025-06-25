@@ -60,6 +60,12 @@ export const useCanvasRenderer = (videoRef: React.RefObject<HTMLVideoElement>) =
         sourceY = (videoHeight - sourceHeight) / 2;
       }
       context.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+
+      // 좌우반전
+      context.save();
+      context.scale(-1, 1);
+      context.translate(-canvasRef.current.width, 0);
+
       context.drawImage(
         videoRef.current,
         sourceX,
@@ -71,6 +77,8 @@ export const useCanvasRenderer = (videoRef: React.RefObject<HTMLVideoElement>) =
         canvasRef.current.width,
         canvasRef.current.height
       );
+
+      context.restore();
     },
     []
   );
@@ -102,10 +110,10 @@ export const useCanvasRenderer = (videoRef: React.RefObject<HTMLVideoElement>) =
         );
         applyCanvasEffects(imageData);
         context.putImageData(imageData, 0, 0);
-        drawLogo(context);
+        // drawLogo(context);
       }
     }
-  }, [applyCanvasEffects, drawCanvas, drawLogo, videoRef]);
+  }, [applyCanvasEffects, drawCanvas, videoRef]);
 
   const renderFrame = useCallback(
     (currentTime: number) => {
